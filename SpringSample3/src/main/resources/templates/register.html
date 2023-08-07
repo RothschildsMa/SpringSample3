@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+</head>
+<body>
+    <form th:action="@{/insert}" th:object="${addForm}" method="post">
+        <div id="inputButtonContainer">
+            <div id="inputContainer">
+                <div id="inputGroupLeft">
+                    <div>
+                        <label for="input1">名前:</label>
+                        <span th:if="${#fields.hasErrors('userName')}"
+                         th:errors="*{userName}" class="error-message"></span>
+                        <input type="text" id="input1" th:field="*{userName}">
+                    </div>
+                    <div>
+                        <label for="input2">生年月日:</label>
+                        <span th:if="${#fields.hasErrors('userBirth')}"
+                         th:errors="*{userBirth}" class="error-message"></span>
+                        <input type="date" id="input2" th:field="*{userBirth}">
+                    </div>
+                    <div>
+                        <label for="input3">電話番号:</label>
+                        <span th:if="${#fields.hasErrors('userPhone')}"
+                         th:errors="*{userPhone}" class="error-message"></span>
+                        <input type="text" id="input3" th:field="*{userPhone}">
+                    </div>
+                    <div>
+                        <label for="input4">メールアドレス:</label>
+                        <span th:if="${#fields.hasErrors('userMail')}"
+                         th:errors="*{userMail}" class="error-message"></span>
+                        <input type="text" id="input4" th:field="*{userMail}">
+                    </div>
+
+                </div>
+            </div>
+            <div id="radioContainer">
+                <label>
+                    <input type="radio" name="radios" th:field="*{userGender}" value="男">男性
+                </label>
+                <label>
+                    <input type="radio" name="radios" th:field="*{userGender}" value="女">女性
+                </label>
+                <span th:if="${#fields.hasErrors('userGender')}"
+                         th:errors="*{userGender}" class="error-message"></span>
+            </div>
+            <div id="buttonContainer">
+                <button type="submit">登録</button>
+                <button type="button">Button 2</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

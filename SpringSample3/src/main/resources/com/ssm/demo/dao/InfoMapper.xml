@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssm.demo.dao.InfoMapper">
+
+	<select id="findall" resultType="com.ssm.demo.entity.User">
+		SELECT * FROM user_info WHERE
+		del_flg = 0;
+
+	</select>
+
+	<select id="findUsers" resultType="com.ssm.demo.entity.User">
+		SELECT * FROM user_info
+		<where>
+			del_flg = 0
+			<if test="userId != null and userId != ''">
+				AND user_id = #{userId}
+			</if>
+
+			<if test="userName != null and userName != ''">
+				AND user_name LIKE CONCAT('%', #{userName}, '%')
+			</if>
+
+			<if test="userGender != null and userGender != ''">
+				AND user_gender = #{userGender}
+			</if>
+
+		</where>
+
+	</select>
+	
+	<select id="findMaxUserId" resultType="com.ssm.demo.entity.User">
+		SELECT * FROM user_info ORDER BY user_id DESC LIMIT 1;
+	</select>
+
+	<insert id="insert">
+		INSERT INTO user_info
+		(user_id,user_name,user_gender,user_birth,password,user_phone,user_mail)
+		VALUES
+		(#{userId},#{userName},#{userGender},#{userBirth},#{password},#{userPhone},#{userMail})
+	
+	</insert>
+
+
+
+
+
+</mapper>
+   

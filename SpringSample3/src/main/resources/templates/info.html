@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Simple Table</title>
+<link rel="stylesheet" type="text/css" href="css/info.css">
+<script src="js/common.js"></script>
+
+
+</head>
+
+<body>
+	<form id="infoForm" th:object="${searchForm}">
+		<div id="inputButtonContainer">
+			<div id="inputContainer">
+				<div id="inputGroupLeft">
+					<div>
+						<label for="input1">ユーザーID:</label>
+						<input type="text" id="input1" th:field="*{userId}"/>
+					</div>
+					<div>
+						<label for="input3">Input 3:</label><input type="text" id="input3">
+					</div>
+				</div>
+				<div id="inputGroupRight">
+					<div>
+						<label for="input2">名前:</label>
+						<input type="text" id="input2" th:field="*{userName}">
+					</div>
+					<div>
+						<label for="input4">Input 4:</label><input type="text" id="input4">
+					</div>
+				</div>
+				<div id="selectContainer">
+					<select id="mainSelect" th:field="*{userGender}">
+						<option value="">All</option>
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div id="buttonContainer">
+			<button id="addButton" onclick="submitForm('infoForm','/add','get')">　Add　</button>
+			<button id="searchButton" onclick="submitForm('infoForm','/search','post')">Search</button>
+			<button id="deleteButton">Delete</button>
+			<button id="logoutButton">Logout</button>
+		</div>
+
+		<div id="tableContainer">
+
+			<table id="mainTable">
+
+				<thead>
+					<tr>
+						<th class="col-id">ID</th>
+						<th class="col-name">名前</th>
+						<th class="col-gender">性別</th>
+						<th class="col-birth">生年月日</th>
+						<th class="col-phone">電話番号</th>
+						<th class="col-email">メールアドレス</th>
+					</tr>
+				</thead>
+
+
+				<tbody>
+					<tr th:each="user : ${userList}" th:object="${user}">
+						<td class="col-id" th:text="*{userId}"></td>
+						<td class="col-name" th:text="*{userName}"></td>
+						<td class="col-gender" th:text="*{userGender}"></td>
+						<td class="col-birth" th:text="*{userBirth}"></td>
+						<td class="col-phone" th:text="*{userPhone}"></td>
+						<td class="col-email" th:text="*{userMail}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</form>
+</body>
+
+</html>
